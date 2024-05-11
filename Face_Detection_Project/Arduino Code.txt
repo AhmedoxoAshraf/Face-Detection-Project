@@ -1,0 +1,19 @@
+#include <cvzone.h>
+
+SerialData serialData(2, 1);
+int valsRec[2];
+
+void setup() {
+ pinMode(5, OUTPUT);
+  pinMode(6, OUTPUT);
+serialData.begin();
+
+}
+
+void loop() {
+  serialData.Get(valsRec);
+  digitalWrite(5, valsRec[0]);
+  digitalWrite(6, valsRec[1]);
+  delay(10);
+
+}

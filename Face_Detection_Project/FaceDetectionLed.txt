@@ -1,0 +1,20 @@
+import cv2
+from cvzone.FaceDetectionModule import FaceDetector
+from cvzone.SerialModule import SerialObject
+
+cap=cv2.VideoCapture(0)
+detector = FaceDetector()
+arduino=SerialObject('COM14')
+
+while True:
+    success,img = cap.read()
+    img, bBoxs = detector.findFaces(img)
+
+    if bBoxs:
+        arduino.sendData([1,0])
+    else :
+        arduino.sendData([0,1])
+
+    cv2.imshow("Ahmed Ashraf", img)
+    cv2.waitKey(1)
+ 
